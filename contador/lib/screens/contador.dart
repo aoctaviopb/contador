@@ -1,33 +1,17 @@
 import 'package:contador/utils/func_contador.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Contador extends StatefulWidget {
+class Contador extends StatelessWidget {
   const Contador({super.key});
-
-  @override
-  State<Contador> createState() => _ContadorState();
-}
-
-class _ContadorState extends State<Contador> {
-  int cont = 0;
-
-  FuncContador funcContador = FuncContador();
-
-  void counter() {
-    cont = funcContador.counter(cont);
-    setState(() {});
-  }
-
-  void reset() {
-    cont = funcContador.reset(cont);
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: counter,
+        onPressed: () {
+          context.read<FuncContadorNotifier>().counter();
+        },
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -37,16 +21,19 @@ class _ContadorState extends State<Contador> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Soy un contador: $cont'),
+            Consumer<FuncContadorNotifier>(
+              builder: (context, ref, child) {
+                return Text('Soy un contador con Provider: ${ref.cont}');
+              },
+            ),
             TextButton(
-              onPressed: reset,
+              onPressed: () {
+                Provider.of<FuncContadorNotifier>(context, listen: false)
+                    .reset();
+              },
               child: const Text('Reiniciar conteo'),
             ),
-/*             Flexible(
-              child: Container(),
-            ), */
           ],
         ),
       ),

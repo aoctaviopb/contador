@@ -1,15 +1,15 @@
-class FuncContador {
-/*   FuncContador({
-    required this.cont,
-  });
+import 'package:flutter/material.dart';
 
-  int cont; */
+class FuncContadorNotifier extends ChangeNotifier {
+  int cont = 0;
 
-  int counter(int cont) {
-    return cont + 1;
+  void counter() {
+    cont = cont + 1;
+    notifyListeners();
   }
 
-  int reset(int cont) {
-    return cont = 0;
+  void reset() {
+    cont = 0;
+    notifyListeners();
   }
 }
