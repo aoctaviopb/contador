@@ -1,9 +1,10 @@
-//Provider
+//Riverpod
 
 import 'package:contador/screens/contador.dart';
 import 'package:contador/utils/func_contador.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:riverpod/riverpod.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
