@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FuncContadorNotifier extends ChangeNotifier {
-  int cont = 0;
+final contadorProvider = StateProvider((ref) {
+  return 0;
+});
+
+final funContNotProvider =
+    StateNotifierProvider<FuncContadorNotifier, int>((ref) {
+  return FuncContadorNotifier();
+});
+
+class FuncContadorNotifier extends StateNotifier<int> {
+  FuncContadorNotifier() : super(0);
 
   void counter() {
-    cont = cont + 1;
-    notifyListeners();
+    state = state + 1;
   }
 
   void reset() {
-    cont = 0;
-    notifyListeners();
+    state = 0;
   }
+
 }

@@ -3,21 +3,19 @@
 import 'package:contador/screens/contador.dart';
 import 'package:contador/utils/func_contador.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => FuncContadorNotifier(),
-    child: const MyApp(),
-  ));
+  runApp(
+    const ProviderScope(child: MyApp()),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ThemeData.dark(useMaterial3: true)
           .copyWith(primaryColor: Colors.amber),
